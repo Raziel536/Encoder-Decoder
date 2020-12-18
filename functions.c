@@ -198,24 +198,24 @@ char* immutableFilterString(const char* string) {
 
 
 bool numberChecker(const char* string) {
-int i, k;
-k = strlen(string);
-for (i = 0; i < k; ++i) {
-    if (!isdigit(string[i])) {
-        return false;
+    int i, k;
+    k = strlen(string);
+    for (i = 0; i < k; ++i) {
+        if (!isdigit(string[i])) {
+            return false;
+        }
+        return true;
     }
-    return true;
-}
 }
 
 
 bool wordChecker(const char* string) {
-int i, k;
-k = strlen(string);
-for (i = 0; i < k; ++i) {
-    if (!isalpha(string[i])) {
-        return false;
+    int i, k;
+    k = strlen(string);
+    for (i = 0; i < k; ++i) {
+        if (!isalpha(string[i])) {
+            return false;
+        }
+        return true;
     }
-    return true;
-}
 }
