@@ -1,0 +1,25 @@
+all: encoder decoder
+
+encoder: encoder.o libcrypt.a
+	gcc -o encoder encoder.o -L. -lcrypt 
+
+decoder: decoder.o libcrypt.a
+	gcc -o decoder decoder.o -L. -lcrypt
+	
+encoder.o: encoder.c
+	gcc -c encoder.c
+
+decoder.o: decoder.c
+	gcc -c decoder.c
+	
+libcrypt.a: functions.o encryption.o
+	ar cr libcrypt.a functions.o encryption.o
+	
+functions.o: functions.c
+	gcc -c functions.c
+	
+encrypt.o: encryption.c
+	gcc -c encryption.c
+
+clean:
+	rm -rf *.o *.a encoder decoder
