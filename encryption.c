@@ -30,8 +30,8 @@ void mutableCaesar(char* string, const int offset) {
 
 
 char* immutableCaesar(char* string, const int offset) {   
-    const int k = strlen(string);
-    char* newString = (char*) malloc((k + 1) * sizeof(char));
+    const int k = strlen(string) + 1;
+    char* newString = (char*) malloc(k * sizeof(char));
     if (newString == NULL) {
         printf("Error - out of memory\n");
     }
@@ -52,8 +52,8 @@ void mutableXOR (char* string, const char* key) {
 
 
 char* immutableXOR (char* string, const char* key) {
-    const int k = strlen(string);
-    char* newString = (char *) malloc (sizeof(char) * (k + 1));
+    const int k = strlen(string) + 1;
+    char* newString = (char *) malloc (sizeof(char) * k);
     if (newString == NULL) {
         printf("Error - out of memory\n");
     }
