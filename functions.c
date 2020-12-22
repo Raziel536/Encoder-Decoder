@@ -16,8 +16,8 @@ void mutableToUpper(char* string) {
 
 char* immutableToUpper(const char* string){
     int i;
-    const int k = strlen(string);
-    char* newString = malloc (sizeof(char) * (k + 1));
+    const int k = strlen(string) + 1;
+    char* newString = malloc (sizeof(char) * k);
     if (newString == NULL) {
         printf("Error - Out of memory\n");
     }
@@ -39,8 +39,8 @@ void mutableToLower (char* string) {
 
 char* immutableToLower (const char* string) {
     int i;
-    const int k = strlen(string);
-    char* newString = malloc (sizeof(char) * (k + 1));
+    const int k = strlen(string) + 1;
+    char* newString = malloc (sizeof(char) * k);
     if (newString == NULL) {
         printf("Error - Out of memory\n");
     }
