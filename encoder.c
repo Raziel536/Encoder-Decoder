@@ -5,14 +5,14 @@
 #include "functions.h"
 #include "encryption.h"
 
-#define METHOD_SZ 12
-#define TEXT_SZ 128
-#define KEY_SZ 20
+#define MetodSz 12
+#define TextSz 128
+#define KeySz 20
 
 int main(int argc, char** argv) {
-	char method[METHOD_SZ];
-	char text[TEXT_SZ];
-	char key[KEY_SZ];
+	char method[MethodSz];
+	char text[TextSz];
+	char key[KeySz];
 	if (argc == 1) {
 		printf("Input method of encrypt [-caesar|-xor]: ");
 		scanf("%s", method);
