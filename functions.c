@@ -16,13 +16,15 @@ void mutableToUpper(char* string) {
 
 char* immutableToUpper(const char* string){
     int i;
-    int k = strlen(string);
-    char* new_string = malloc (sizeof(char) * (k + 1));
-    strcpy(new_string, string);
-    for (i = 0; i < k; ++i) {
-        new_string[i] = toupper(string[i]);
+    const int k = strlen(string);
+    char* newString = malloc (sizeof(char) * (k + 1));
+    if (newString == NULL) {
+        printf("Error - Out of memory\n");
     }
-    return new_string;
+    strcpy(newString, string);
+    mutableToUpper(newString);
+    }
+    return newString;
 }
 
 
@@ -37,185 +39,128 @@ void mutableToLower (char* string) {
 
 char* immutableToLower (const char* string) {
     int i;
-    int k = strlen(string);
-    char* new_string = malloc (sizeof(char) * (k + 1));
-    strcpy(new_string, string);
-    for (i = 0; i < k; ++i) {
-        new_string[i] = tolower(string[i]);
+    const int k = strlen(string);
+    char* newString = malloc (sizeof(char) * (k + 1));
+    if (newString == NULL) {
+        printf("Error - Out of memory\n");
     }
-    return new_string;
+    strcpy(newString, string);
+    mutableToLower(newString);
+    return newString;
 }
 
 
 void mutableStrip(char* string) {
     int begin = 0;
-    int end = strlen(string) - 1;
+    int end;
     int k, i;
-    while(string[begin] == ' ') {
-        if(string[begin+1] == '\0') {
-            break;
-        }
-        ++begin;
-    }
-    if(begin == end) {
+    if (strlen(string) == 0) { 
         k = 0;
     } else {
-        while (string[end] == ' ') {
-        --end;
-        }
-        k = end - begin + 1;
-    }
-    for (i = 0; i < k; ++i) {
-        string[i] = string[i + begin];
+            end = strlen(string) - 1;
+            while(string[begin] == ' ') {
+                if(string[begin + 1] == '\0') {
+                    break;
+                }
+                ++begin;
+            }
+            if(begin == end) {
+                k = 0;
+            } else {
+                    while (string[end] == ' ') {
+                            --end;
+                    }
+                    k = end - begin + 1;    
+                    for (i = 0; i < k; ++i) {
+                            string[i] = string[i + begin];
+                    }
+            }
     }
     string[k] = '\0';
 }
 
 
 char* immutableStrip(const char* string) {
-    int begin = 0;
-    int i = 0, j = 0;
-    int k;
-    int end = strlen(string) - 1;
-    while(string[begin] == ' ') {
-        if(string[begin + 1] == '\0') {
-            break;
-        }
-        ++begin;
+    const int k = strlen(string) + 1;
+    char* newString = (char*) malloc(k * sizeof(char));
+    if (newString == NULL) {
+        printf("Error - out of memory\n");
     }
-    if(begin == end) {
-        k = 0;
-    } else {
-        while (string[end] == ' ') {
-        --end;
-        }
-        k = end - begin + 1;
-    }
-    char* result = (char*) malloc((k + 1) * sizeof(char));
-    if(result == NULL) {
-        printf("Malloc error - No memory\n");
-    }
-    for (j = 0; j < k; ++j) {
-        result[j] = string[i + begin];
-        i++;
-    }
-    result[k] = '\0';
-    return result;
+    strcpy(newString, string);
+    mutableStrip(newString);
+    return newString;
 }
 
 
 void mutableStripAll(char* string) {
-    int i = 0, k, j;
-    k = strlen(string);
-    while(string[i] != '\0') {
-        if(string[i] == ' ') {
-            for(j = i; j < k-1; ++j) {
-                string[j] = string [j + 1];
-            }
-            string[k - 1] = '\0';
-            --k;
+    int i = 0, j = 0;
+    int k = strlen(string);
+    for (i = 0; i < k; ++i) {
+        if (string[i] != ' ') {
+            string[j + 1] = string[i];
         }
-        ++i;
     }
+    string[j] = '\0';
 }
 
 
 char* immutableStripAll (const char* string) {
-    int i = 0, j = 0;
-    int s = 1;
-    char* result = (char*) malloc (s * sizeof(char));
-    if ( result == NULL) {
-        printf("Malloc error - out of memory\n");
+    const int k = strlen(string) + 1;
+    char* newString = (char*) malloc(k * sizeof(char));
+    if (newString == NULL) {
+        printf("Error - out of memory\n");
     }
-    while(string[i] == ' ') {
-        i++;
-    }
-    while(string[i] != '\0') {
-        if(string[i] == ' ') {
-            i++;
-            continue;
-        }
-
-        result[j] = string[i];
-        j++;
-        i++;
-        if(j == s) {
-            s++;
-            result = (char*) realloc(result, s * sizeof(char));
-            if (result == NULL) {
-                printf("Realloc error - out of memory\n");
-            }
-        }
-    }
-    result[j] = '\0';
-    return result;
+    strcpy(newString, string);
+    mutableStripAll(newString);
+    return newString;
 }
 
 
 void mutableFilterString(char* string) {
-    int i = 0;
-    int k, j;
-    k = strlen(string);
-    while(string[i] != '\0') {
-        if(string[i] != ' ' && !isalpha(string[i]) && !isdigit(string[i])) {
-            for(j = i; j < k-1; ++j) {
-                string[j] = string [j + 1];
-            }
-            string[k - 1] = '\0';
-            --k;
+    int i = 0, j = 0;
+    int k = strlen(string);
+    for(i = 0; i < k; ++i) {
+            if(string[i] != ' ' && !isalpha(string[i]) && !isdigit(string[i])) {
+                string[j + 1] = string[i];
         }
-        ++i;
-    }
+        string[j] = '\0';
 }
 
 
 char* immutableFilterString(const char* string) {
-    int i = 0, j = 0;
-    int s = 1;
-    char* result = (char*) malloc(s * sizeof(char));
-    if (result == NULL) {
-        printf("Malloc error - out of memory\n");
+    const int k = strlen(string) + 1;
+    char* newString = (char*) malloc(k * sizeof(char));
+    if (newString == NULL) {
+        printf("Error - out of memory\n");
     }
-    while(string[i] != '\0') {
-        if(string[i] != ' ' && !isalpha(string[i]) && !isdigit(string[i])) {
-            i++;
-            continue;
-        }
-        result[j] = string[i];
-        i++;
-        j++;
-        if(j == s) {
-            s++;
-            result = (char*) realloc (result, s * sizeof(char));
-            if(result == NULL) {
-                printf("Realloc error - out of memory\n");
-            }
-        }
-    }
-    result[j] = '\0' ;
-    return result;
+    strcpy(newString, string);
+    mutableFilterString(newString);
+    return newString;
 }
 
 
 bool numberChecker(const char* string) {
-    int i, k;
-    k = strlen(string);
-    for (i = 0; i < k; ++i) {
-        if (!isdigit(string[i])) {
-            return false;
-        }
-        return true;
+    int i;
+    const int k = strlen(string);
+    if (string[i] == '-') {
+        i++;
     }
+    for (; i < k; ++i) {
+         if (!isdigit(string[i])) {
+             return false;
+         }
+    }
+    return true;
 }
 
 
 bool wordChecker(const char* string) {
-    int i, k;
-    k = strlen(string);
+    int i;
+    const int k = strlen(string);
     for (i = 0; i < k; ++i) {
         if (!isalpha(string[i])) {
             return false;
-        }
-        return true;
+        }        
     }
+    return true;    
 }
