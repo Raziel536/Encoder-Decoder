@@ -10,9 +10,9 @@ int main(int argc, char** argv) {
 	const int methodSize = 12;
 	const int textSize = 128;
 	const int keySize = 20;
-	char method[MethodSz];
-	char text[TextSz];
-	char key[KeySz];
+	char method[methodSize];
+	char text[textSize];
+	char key[keySize];
 	if (argc == 1) {
 		printf("Input method of encrypt [-caesar|-xor]: ");
 		scanf("%s", method);
