@@ -5,12 +5,11 @@
 #include "functions.h"
 #include "encryption.h"
 
-#define MethodSz 12
-#define TextSz 128
-#define KeySz 20
-
 
 int main(int argc, char** argv) {
+	const int methodSize = 12;
+	const int textSize = 128;
+	const int keySize = 20;
 	char method[MethodSz];
 	char text[TextSz];
 	char key[KeySz];
