@@ -5,7 +5,7 @@
 #include "functions.h"
 #include "encryption.h"
 
-#define MetodSz 12
+#define MethodSz 12
 #define TextSz 128
 #define KeySz 20
 
