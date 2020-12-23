@@ -140,7 +140,7 @@ char* immutableFilterString(const char* string) {
 
 
 bool numberChecker(const char* string) {
-    int i;
+    int i = 0;
     const int k = strlen(string);
     if (string[i] == '-') {
         i++;
