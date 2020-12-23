@@ -23,7 +23,6 @@ char* immutableToUpper(const char* string){
     }
     strcpy(newString, string);
     mutableToUpper(newString);
-    }
     return newString;
 }
 
@@ -123,7 +122,8 @@ void mutableFilterString(char* string) {
             if(string[i] != ' ' && !isalpha(string[i]) && !isdigit(string[i])) {
                 string[j + 1] = string[i];
         }
-        string[j] = '\0';
+    }
+    string[j] = '\0';
 }
 
 
